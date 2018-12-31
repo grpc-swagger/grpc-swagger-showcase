@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package io.grpc.grpcswagger.showcase;
+
+option java_outer_classname = "HouseProto";
+
+message House {
+    uint64 id = 1;
+    bool sold = 2;
+    float price = 3;
+    bytes photo = 4;
+    string city = 5;
+}
