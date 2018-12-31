@@ -4,6 +4,8 @@ package io.grpc.grpcswagger.showcase;
 
 option java_outer_classname = "HelloProto";
 
+import "house.proto";
+
 message HelloRequest {
     string recipient = 1;
     string message = 2;
@@ -14,6 +16,31 @@ message HelloResponse {
     map<string, int64> map = 2;
 }
 
+message GetUserRequest {
+    uint64 user_id = 1;
+}
+
+message GetUserResponse {
+    enum Status {
+        UNKNOWN = 0;
+        OK = 1;
+        FAIL = 2;
+    }
+    Status status = 1;
+    User user = 2;
+}
+
+message User {
+    uint64 user_id = 1;
+    string user_name = 2;
+    int32 age = 3;
+    double score = 4;
+    map<string, uint64> properties = 5;
+    repeated string alias = 6;
+    repeated House houses = 7;
+}
+
 service HelloService {
     rpc SayHello (HelloRequest) returns (HelloResponse) {}
+    rpc GetUser (GetUserRequest) returns (GetUserResponse) {}
 }
