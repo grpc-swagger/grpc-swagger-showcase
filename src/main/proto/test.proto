@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package io.grpc.grpcswagger.showcase;
+
+option java_outer_classname = "TestProto";
+
+
+message Request {
+    string s = 1;
+}
+
+message Response {
+    string message = 1;
+}
+
+service TestService {
+    rpc Test (Request) returns (Response) {}
+}
+

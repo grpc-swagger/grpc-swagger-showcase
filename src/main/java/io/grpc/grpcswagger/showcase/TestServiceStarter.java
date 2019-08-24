@@ -13,15 +13,15 @@ import io.grpc.protobuf.services.ProtoReflectionService;
  * @author zhangjikai
  * Created on 2018-12-30
  */
-public class Main {
-    private static final Logger logger = LoggerFactory.getLogger(Main.class);
-    private static final int SERVER_PORT = 12347;
+public class TestServiceStarter {
+    private static final Logger logger = LoggerFactory.getLogger(TestServiceStarter.class);
+    private static final int SERVER_PORT = 12349;
 
     public static void main(String[] args) {
         logger.info("Starting grpc server on port: " + SERVER_PORT);
         try {
             Server server = ServerBuilder.forPort(SERVER_PORT)
-                    .addService(new HelloServiceImpl())
+                    .addService(new TestServiceImpl())
                     .addService(ProtoReflectionService.newInstance())
                     .build()
                     .start();

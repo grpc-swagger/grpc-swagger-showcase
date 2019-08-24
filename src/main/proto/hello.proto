@@ -9,6 +9,9 @@ import "house.proto";
 message HelloRequest {
     string recipient = 1;
     string message = 2;
+    string extra = 3;
+    string name = 4;
+    string less=5;
 }
 
 message HelloResponse {
@@ -38,9 +41,11 @@ message User {
     map<string, uint64> properties = 5;
     repeated string alias = 6;
     repeated House houses = 7;
+    string extra = 8;
 }
 
 service HelloService {
     rpc SayHello (HelloRequest) returns (HelloResponse) {}
     rpc GetUser (GetUserRequest) returns (GetUserResponse) {}
 }
+
