@@ -45,7 +45,10 @@ message User {
 }
 
 service HelloService {
-    rpc SayHello (HelloRequest) returns (HelloResponse) {}
-    rpc GetUser (GetUserRequest) returns (GetUserResponse) {}
+    rpc SayHello (HelloRequest) returns (HelloResponse);
+    rpc GetUser (GetUserRequest) returns (GetUserResponse);
 }
 
+service UserService {
+    rpc GetUser (GetUserRequest) returns (GetUserResponse);
+}
