@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,6 +16,7 @@ import com.google.common.collect.Lists;
 
 import io.grpc.grpcswagger.showcase.HelloProto.HelloRequest;
 import io.grpc.grpcswagger.showcase.HelloProto.HelloResponse;
+import io.grpc.grpcswagger.showcase.HelloProto.User.Address;
 import io.grpc.grpcswagger.showcase.HelloServiceGrpc.HelloServiceImplBase;
 import io.grpc.stub.StreamObserver;
 
@@ -28,7 +31,7 @@ public class HelloServiceImpl extends HelloServiceImplBase {
         logger.info("Receive message: {}", request.getRecipient());
         Map<String, Long> map = singletonMap("hello", 123L);
         HelloResponse response = HelloResponse.newBuilder()
-                .setMessage("Reply: " + request.getRecipient())
+                .setMessage("Reply: " + ToStringBuilder.reflectionToString(request, ToStringStyle.SHORT_PREFIX_STYLE))
                 .putAllMap(map)
                 .build();
         responseObserver.onNext(response);
@@ -50,6 +53,10 @@ public class HelloServiceImpl extends HelloServiceImplBase {
                 .putAllProperties(ImmutableMap.of("key", 1L))
                 .addAllAlias(Lists.newArrayList("zhangsan", "lisi"))
                 .addAllHouses(houses)
+                .setAddress(Address.newBuilder()
+                        .setProvince("a")
+                        .setCity("b")
+                        .build())
                 .build();
         HelloProto.GetUserResponse userResponse = HelloProto.GetUserResponse.newBuilder()
                 .setStatus(HelloProto.GetUserResponse.Status.OK)
@@ -58,6 +65,4 @@ public class HelloServiceImpl extends HelloServiceImplBase {
         responseObserver.onNext(userResponse);
         responseObserver.onCompleted();
     }
-    
-    
 }

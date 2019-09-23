@@ -12,6 +12,10 @@ message HelloRequest {
     string extra = 3;
     string name = 4;
     string less=5;
+    Extension extension = 6;
+    message Extension {
+        string user_id = 1;
+    }
 }
 
 message HelloResponse {
@@ -42,6 +46,11 @@ message User {
     repeated string alias = 6;
     repeated House houses = 7;
     string extra = 8;
+    Address address = 9;
+    message Address {
+        string province = 1;
+        string city = 2;
+    }
 }
 
 service HelloService {
