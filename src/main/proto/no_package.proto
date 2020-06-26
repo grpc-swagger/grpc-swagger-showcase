@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+option java_outer_classname = "NoPackageProto";
+
+message Request {
+    string s = 1;
+}
+
+message Response {
+    string message = 1;
+}
+
+service NoPackageService {
+    rpc Test (Request) returns (Response) {}
+}

@@ -1,5 +1,3 @@
-package io.grpc.grpcswagger.showcase;
-
 import java.io.IOException;
 
 import org.slf4j.Logger;
@@ -11,18 +9,19 @@ import io.grpc.ServerInterceptors;
 import io.grpc.protobuf.services.ProtoReflectionService;
 
 /**
- * @author zhangjikai
- * Created on 2018-12-30
+ * @author Jikai Zhang
+ * @date 2020-06-26
  */
-public class HelloServiceStarter {
-    private static final Logger logger = LoggerFactory.getLogger(HelloServiceStarter.class);
-    private static final int SERVER_PORT = 12347;
-
+public class NoPackageServiceStarter {
+    
+    private static final Logger logger = LoggerFactory.getLogger(NoPackageServiceStarter.class);
+    private static final int SERVER_PORT = 12348;
+    
     public static void main(String[] args) {
         logger.info("Starting grpc server on port: " + SERVER_PORT);
         try {
             Server server = ServerBuilder.forPort(SERVER_PORT)
-                    .addService(ServerInterceptors.intercept(new HelloServiceImpl(), new HeaderServerInterceptor()))
+                    .addService(ServerInterceptors.intercept(new NoPackageServiceImpl()))
                     .addService(ProtoReflectionService.newInstance())
                     .build()
                     .start();
@@ -32,5 +31,5 @@ public class HelloServiceStarter {
             System.exit(0);
         }
     }
-
+    
 }
